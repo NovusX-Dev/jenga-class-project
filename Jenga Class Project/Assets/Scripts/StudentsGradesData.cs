@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Jenga
 {
     [Serializable]
-    public class BlockData
+    public class StudentsGradesData
     {
         public int id;
         public string subject;

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5752190734902591913}
   - component: {fileID: 4087565903386515310}
   - component: {fileID: 1427291301444595449}
+  - component: {fileID: 3739897086045084521}
   m_Layer: 0
   m_Name: Jenga Wood
   m_TagString: Untagged
@@ -133,3 +134,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3739897086045084521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8114139875872769915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0de63c932b64bd39f592c9585a6d4da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
