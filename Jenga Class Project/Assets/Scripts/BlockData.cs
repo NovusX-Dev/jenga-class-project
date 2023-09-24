@@ -1,18 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
-public class BlockData : MonoBehaviour
+namespace Jenga
 {
-    // Start is called before the first frame update
-    void Start()
+    [Serializable]
+    public class BlockData
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public int id;
+        public string subject;
+        public string grade;
+        public int mastery;
+        public string domainid;
+        public string domain;
+        public string cluster;
+        public string standardid;
+        public string standarddescription;
     }
 }
