@@ -285,7 +285,7 @@ Transform:
   m_GameObject: {fileID: 346870534}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.25, z: 0}
   m_LocalScale: {x: 2, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -438,6 +438,7 @@ MonoBehaviour:
   woodBlock: {fileID: 3739897086045084521, guid: e94c833e87b30474aa40c157a0cd8f09, type: 3}
   stoneBlock: {fileID: 4359707172647504424, guid: 9552235e0a9d781438c9eccd7355b825, type: 3}
   towerBuilder: {fileID: 932376266}
+  glassTowerBreaker: {fileID: 1356379247}
 --- !u!114 &932376266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -579,6 +580,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 932376264}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1356379246
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1356379248}
+  - component: {fileID: 1356379247}
+  m_Layer: 0
+  m_Name: Glass Breaker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1356379247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1356379246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 162f11c67cb03224881027ff47bfe55f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1356379248
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1356379246}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1386240968
 GameObject:
   m_ObjectHideFlags: 0
@@ -619,3 +664,4 @@ SceneRoots:
   - {fileID: 346870538}
   - {fileID: 932376264}
   - {fileID: 313991946}
+  - {fileID: 1356379248}

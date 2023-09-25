@@ -13,6 +13,8 @@ namespace Jenga
     public class BlockInfo : MonoBehaviour
     {
         #region EXPOSED_VARIABLES
+        
+        [SerializeField] private Rigidbody rigidbody;
 
         #endregion
 
@@ -47,6 +49,16 @@ namespace Jenga
         public void SetData(StudentsGradesData data)
         {
             StudentsGradesData = data;
+        }
+        
+        public void SetPhysics(bool activate)
+        {
+            rigidbody.isKinematic = !activate;
+        }
+        
+        public void Release()
+        {
+            _pool.Release(this);
         }
 
         #endregion

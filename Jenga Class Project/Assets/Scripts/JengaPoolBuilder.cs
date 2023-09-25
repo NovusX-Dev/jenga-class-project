@@ -17,6 +17,7 @@ namespace Jenga
         [SerializeField] private BlockInfo stoneBlock;
         
         [SerializeField] private JengaTowerBuilder towerBuilder;
+        [SerializeField] private GlassTowerBreaker glassTowerBreaker;
 
         #endregion
 
@@ -34,6 +35,7 @@ namespace Jenga
         private ObjectPool<BlockInfo> _glassPool;
         private ObjectPool<BlockInfo> _woodPool;
         private ObjectPool<BlockInfo> _stonePool;
+        private List<BlockInfo> _allBlocks = new List<BlockInfo>();
 
         #endregion
 
@@ -60,6 +62,8 @@ namespace Jenga
             _stonePool = new ObjectPool<BlockInfo>(CreateStoneBlock, GetBlock, ReleaseBlock, DestroyBlock, false, 50);
             yield return new WaitForEndOfFrame();
             yield return towerBuilder.InitStart(this);
+            yield return new WaitUntil(()=> towerBuilder.Initialized);
+            glassTowerBreaker.InitStart(this, _allBlocks);
         }
 
         #endregion
@@ -138,6 +142,7 @@ namespace Jenga
         private void ReleaseBlock(BlockInfo block)
         {
             block.transform.SetParent(blockPoolParent);
+            block.transform.localPosition = Vector3.zero;
             block.gameObject.SetActive(false);
         }
         
@@ -149,6 +154,11 @@ namespace Jenga
         #endregion
 
         #region PUBLIC_METHODS
+        
+        public void AddToAllBlocksList(BlockInfo block)
+        {
+            _allBlocks.Add(block);
+        }
 
         #endregion
 

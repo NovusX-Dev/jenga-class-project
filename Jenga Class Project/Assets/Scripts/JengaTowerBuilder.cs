@@ -25,6 +25,8 @@ namespace Jenga
         #endregion
 
         #region PUBLIC_VARIABLES
+        
+        public bool Initialized { get; private set; }
 
         #endregion
 
@@ -37,6 +39,8 @@ namespace Jenga
             CreateJengaTowerInstantly(leftTower, _poolBuilder.SixthGradeDataList);
             CreateJengaTowerInstantly(centerTower, _poolBuilder.SeventhGradeDataList);
             CreateJengaTowerInstantly(rightTower, _poolBuilder.EightGradeDataList);
+            yield return new WaitForEndOfFrame();
+            Initialized = true;
         }
 
         #endregion
@@ -64,7 +68,7 @@ namespace Jenga
                 block.transform.localPosition = spawnPosition;
                 block.transform.rotation = rotation;
                 block.name = $"{block.BlockType} block {i}";
-                
+                _poolBuilder.AddToAllBlocksList(block);
                 startRotationIndex++;
 
                 if (staggerX)
