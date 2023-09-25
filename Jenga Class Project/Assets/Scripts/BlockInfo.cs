@@ -15,7 +15,8 @@ namespace Jenga
         #region EXPOSED_VARIABLES
         
         [SerializeField] private Rigidbody rigidbody;
-
+        [SerializeField] private BlockHighlight blockHighlight;
+        
         #endregion
 
         #region PRIVATE_VARIABLES
@@ -49,6 +50,7 @@ namespace Jenga
         public void SetData(StudentsGradesData data)
         {
             StudentsGradesData = data;
+            blockHighlight.SetData(data);
         }
         
         public void SetPhysics(bool activate)
