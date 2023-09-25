@@ -13,7 +13,6 @@ namespace Jenga
         [SerializeField] private JengaTower centerTower;
         [SerializeField] private JengaTower rightTower;
         [SerializeField] private float blockSpacing = 0.25f;
-        [SerializeField] private bool gradualInstantiation = false;
         [SerializeField] private int rotationInterval = 3;
 
         #endregion

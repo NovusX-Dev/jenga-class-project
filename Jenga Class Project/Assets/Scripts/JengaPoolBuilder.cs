@@ -57,6 +57,10 @@ namespace Jenga
             yield return GetDataRoutine();
             FilterDataByGrade();
             yield return null;
+            yield return FullSortRoutine(_sixthGradeDataList);
+            yield return FullSortRoutine(_seventhGradeDataList);
+            yield return FullSortRoutine(_eightGradeDataList);
+            yield return null;
             _glassPool = new ObjectPool<BlockInfo>(CreateGlassBlock, GetBlock, ReleaseBlock, DestroyBlock, false, 50);
             _woodPool = new ObjectPool<BlockInfo>(CreateWoodBlock, GetBlock, ReleaseBlock, DestroyBlock, true, 50);
             _stonePool = new ObjectPool<BlockInfo>(CreateStoneBlock, GetBlock, ReleaseBlock, DestroyBlock, false, 50);
@@ -109,6 +113,32 @@ namespace Jenga
                 }
             }
         }
+        
+        IEnumerator FullSortRoutine(List<StudentsGradesData> data)
+        {
+            yield return null;
+            SortDataByDomainAscending(data);
+            yield return null;
+            SortDataByClusterAscending(data);
+            yield return null;
+            SortDataByStandardIdAscending(data);
+        }
+        
+        private void SortDataByDomainAscending(List<StudentsGradesData> data)
+        {
+            data.Sort((previousData, nextData) => string.Compare(previousData.domain, nextData.domain, StringComparison.Ordinal));
+        }
+        
+        private void SortDataByClusterAscending(List<StudentsGradesData> data)
+        {
+            data.Sort((previousData, nextData) => string.Compare(previousData.cluster, nextData.cluster, StringComparison.Ordinal));
+        }
+        
+        private void SortDataByStandardIdAscending(List<StudentsGradesData> data)
+        {
+            data.Sort((previousData, nextData) => string.Compare(previousData.standardid, nextData.standardid, StringComparison.Ordinal));
+        }
+        
 
         private BlockInfo CreateGlassBlock()
         {
@@ -154,6 +184,8 @@ namespace Jenga
         #endregion
 
         #region PUBLIC_METHODS
+        
+        
         
         public void AddToAllBlocksList(BlockInfo block)
         {
