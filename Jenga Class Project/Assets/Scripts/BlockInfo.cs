@@ -13,8 +13,6 @@ namespace Jenga
     public class BlockInfo : MonoBehaviour
     {
         #region EXPOSED_VARIABLES
-        
-        [field: SerializeField] public BlockType blockType { get; private set; }
 
         #endregion
 
@@ -26,7 +24,8 @@ namespace Jenga
 
         #region PUBLIC_VARIABLES
         
-        public StudentsGradesData studentsGradesData { get; private set; }
+        public BlockType BlockType { get; set; }
+        public StudentsGradesData StudentsGradesData { get; private set; }
 
         #endregion
 
@@ -47,7 +46,7 @@ namespace Jenga
         
         public void SetData(StudentsGradesData data)
         {
-            studentsGradesData = data;
+            StudentsGradesData = data;
         }
 
         #endregion

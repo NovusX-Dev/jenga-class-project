@@ -31,14 +31,21 @@ namespace Jenga
         private List<StudentsGradesData> _sixthGradeDataList = new List<StudentsGradesData>();
         private List<StudentsGradesData> _seventhGradeDataList = new List<StudentsGradesData>();
         private List<StudentsGradesData> _eightGradeDataList = new List<StudentsGradesData>();
-        private ObjectPool<BlockInfo> _sixthPool;
-        private ObjectPool<BlockInfo> _seventhPool;
-        private ObjectPool<BlockInfo> _eighthPool;
+        private ObjectPool<BlockInfo> _glassPool;
+        private ObjectPool<BlockInfo> _woodPool;
+        private ObjectPool<BlockInfo> _stonePool;
 
         #endregion
 
         #region PUBLIC_VARIABLES
 
+        public List<StudentsGradesData> SixthGradeDataList => _sixthGradeDataList;
+        public List<StudentsGradesData> SeventhGradeDataList => _seventhGradeDataList;
+        public List<StudentsGradesData> EightGradeDataList => _eightGradeDataList;
+        public ObjectPool<BlockInfo> GlassPool => _glassPool;
+        public ObjectPool<BlockInfo> WoodPool => _woodPool;
+        public ObjectPool<BlockInfo> StonePool => _stonePool;
+        
         #endregion
 
         #region UNITY_CALLS
@@ -48,10 +55,11 @@ namespace Jenga
             yield return GetDataRoutine();
             FilterDataByGrade();
             yield return null;
-            _sixthPool = new ObjectPool<BlockInfo>(CreateGlassBlock, GetBlock, ReleaseBlock, DestroyBlock, false, _sixthGradeDataList.Count + 10);
-            _seventhPool = new ObjectPool<BlockInfo>(CreateWoodBlock, GetBlock, ReleaseBlock, DestroyBlock, true, _seventhGradeDataList.Count + 10);
-            _eighthPool = new ObjectPool<BlockInfo>(CreateStoneBlock, GetBlock, ReleaseBlock, DestroyBlock, false, _eightGradeDataList.Count + 10);
-            
+            _glassPool = new ObjectPool<BlockInfo>(CreateGlassBlock, GetBlock, ReleaseBlock, DestroyBlock, false, 50);
+            _woodPool = new ObjectPool<BlockInfo>(CreateWoodBlock, GetBlock, ReleaseBlock, DestroyBlock, true, 50);
+            _stonePool = new ObjectPool<BlockInfo>(CreateStoneBlock, GetBlock, ReleaseBlock, DestroyBlock, false, 50);
+            yield return new WaitForEndOfFrame();
+            yield return towerBuilder.InitStart(this);
         }
 
         #endregion
@@ -101,21 +109,24 @@ namespace Jenga
         private BlockInfo CreateGlassBlock()
         {
             var block = Instantiate(glassBlock, blockPoolParent, true);
-            block.SetPool(_sixthPool);
+            block.SetPool(_glassPool);
+            block.BlockType = BlockType.Glass;
             return block;
         }
         
         private BlockInfo CreateWoodBlock()
         {
             var block = Instantiate(woodBlock, blockPoolParent, true);
-            block.SetPool(_seventhPool);
+            block.SetPool(_woodPool);
+            block.BlockType = BlockType.Wood;
             return block;
         }
         
         private BlockInfo CreateStoneBlock()
         {
             var block = Instantiate(stoneBlock, blockPoolParent, true);
-            block.SetPool(_eighthPool);
+            block.SetPool(_stonePool);
+            block.BlockType = BlockType.Stone;
             return block;
         }
 
@@ -126,6 +137,7 @@ namespace Jenga
         
         private void ReleaseBlock(BlockInfo block)
         {
+            block.transform.SetParent(blockPoolParent);
             block.gameObject.SetActive(false);
         }
         
@@ -134,7 +146,6 @@ namespace Jenga
             Destroy(block.gameObject);
         }
         
-
         #endregion
 
         #region PUBLIC_METHODS
