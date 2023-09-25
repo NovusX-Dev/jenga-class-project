@@ -7,13 +7,15 @@ namespace Jenga
     {
         #region EXPOSED_VARIABLES
 
-        [SerializeField] private Camera mainCamera = null;
         [SerializeField] private float rotationSpeed = 5f;
         [SerializeField] private float zoomSpeed = 5f;
         [SerializeField] private Vector2 zoomClamps = new Vector2( 5f, 20f);
         [SerializeField] private Vector2 verticalClamps = new Vector2( 0.5f, 5.5f);
         [SerializeField] private Vector3 towerFocusOffset = new Vector3(0f, 3.5f, -10f);
         [SerializeField] private float verticalMovementSpeed = 1f;
+        
+        [Header("References")]
+        [SerializeField] private Camera mainCamera = null;
         [SerializeField] private JengaTower[] towers;
         
         #endregion
@@ -22,10 +24,6 @@ namespace Jenga
         
         private Transform _currentTarget;
         private int _currentTargetIndex = 0;
-
-        #endregion
-
-        #region PUBLIC_VARIABLES
 
         #endregion
 
@@ -77,7 +75,7 @@ namespace Jenga
 
         #region PUBLIC_METHODS
         
-        public void SetTarget(Transform target, bool focusCamera)
+        private void SetTarget(Transform target, bool focusCamera)
         {
             _currentTarget = target;
             if(focusCamera)

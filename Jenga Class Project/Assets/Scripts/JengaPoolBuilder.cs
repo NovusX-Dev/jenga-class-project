@@ -11,11 +11,13 @@ namespace Jenga
     {
         #region EXPOSED_VARIABLES
 
+        [Header("Jenga")]
         [SerializeField] private Transform blockPoolParent;
         [SerializeField] private BlockInfo glassBlock;
         [SerializeField] private BlockInfo woodBlock;
         [SerializeField] private BlockInfo stoneBlock;
         
+        [Header("References")]
         [SerializeField] private JengaTowerBuilder towerBuilder;
         [SerializeField] private GlassTowerBreaker glassTowerBreaker;
 
@@ -67,7 +69,7 @@ namespace Jenga
             yield return new WaitForEndOfFrame();
             yield return towerBuilder.InitStart(this);
             yield return new WaitUntil(()=> towerBuilder.Initialized);
-            glassTowerBreaker.InitStart(this, _allBlocks);
+            glassTowerBreaker.InitStart(_allBlocks);
         }
 
         #endregion
@@ -114,7 +116,7 @@ namespace Jenga
             }
         }
         
-        IEnumerator FullSortRoutine(List<StudentsGradesData> data)
+        private IEnumerator FullSortRoutine(List<StudentsGradesData> data)
         {
             yield return null;
             SortDataByDomainAscending(data);
@@ -122,23 +124,26 @@ namespace Jenga
             SortDataByClusterAscending(data);
             yield return null;
             SortDataByStandardIdAscending(data);
-        }
+
+            void SortDataByDomainAscending(List<StudentsGradesData> data)
+            {
+                data.Sort((previousData, nextData) => string.Compare(previousData.domain, nextData.domain, StringComparison.Ordinal));
+            }
         
-        private void SortDataByDomainAscending(List<StudentsGradesData> data)
-        {
-            data.Sort((previousData, nextData) => string.Compare(previousData.domain, nextData.domain, StringComparison.Ordinal));
-        }
+            void SortDataByClusterAscending(List<StudentsGradesData> data)
+            {
+                data.Sort((previousData, nextData) => string.Compare(previousData.cluster, nextData.cluster, StringComparison.Ordinal));
+            }
         
-        private void SortDataByClusterAscending(List<StudentsGradesData> data)
-        {
-            data.Sort((previousData, nextData) => string.Compare(previousData.cluster, nextData.cluster, StringComparison.Ordinal));
+            void SortDataByStandardIdAscending(List<StudentsGradesData> data)
+            {
+                data.Sort((previousData, nextData) => string.Compare(previousData.standardid, nextData.standardid, StringComparison.Ordinal));
+            }
         }
+
+        #endregion
         
-        private void SortDataByStandardIdAscending(List<StudentsGradesData> data)
-        {
-            data.Sort((previousData, nextData) => string.Compare(previousData.standardid, nextData.standardid, StringComparison.Ordinal));
-        }
-        
+        #region POOLING
 
         private BlockInfo CreateGlassBlock()
         {
@@ -180,12 +185,10 @@ namespace Jenga
         {
             Destroy(block.gameObject);
         }
-        
+
         #endregion
 
         #region PUBLIC_METHODS
-        
-        
         
         public void AddToAllBlocksList(BlockInfo block)
         {

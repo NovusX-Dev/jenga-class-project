@@ -32,13 +32,6 @@ namespace Jenga
 
         #endregion
 
-        #region UNITY_CALLS
-
-        #endregion
-
-        #region PRIVATE_METHODS
-
-        #endregion
 
         #region PUBLIC_METHODS
         

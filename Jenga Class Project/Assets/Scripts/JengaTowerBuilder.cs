@@ -9,9 +9,12 @@ namespace Jenga
     {
         #region EXPOSED_VARIABLES
 
+        [Header("Towers")]
         [SerializeField] private JengaTower leftTower;
         [SerializeField] private JengaTower centerTower;
         [SerializeField] private JengaTower rightTower;
+        
+        [Header("Block Settings")]
         [SerializeField] private float blockSpacing = 0.25f;
         [SerializeField] private int rotationInterval = 3;
 
@@ -134,11 +137,5 @@ namespace Jenga
         }
         
         #endregion
-
-        #region PUBLIC_METHODS
-
-        #endregion
-
-
     }
 }

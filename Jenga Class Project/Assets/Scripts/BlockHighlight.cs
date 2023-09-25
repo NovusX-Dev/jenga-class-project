@@ -17,7 +17,6 @@ namespace Jenga
 
         private bool _clicked;
         private bool _isHighlighted;
-        private WaitForSeconds _waitTime;
         private Material _originalMaterial;
         private Color _originalColor;
         private StudentsGradesData _studentsGradesData;
@@ -37,7 +36,6 @@ namespace Jenga
         {
             _originalMaterial = GetComponent<MeshRenderer>().material;
             _originalColor = _originalMaterial.color;
-            _waitTime = new WaitForSeconds(2f);
         }
 
         private void OnMouseEnter()
@@ -51,15 +49,9 @@ namespace Jenga
             _originalMaterial.color = _originalColor;
             _isHighlighted = false;
             if (!_clicked) return;
+            OnBlockExited?.Invoke();
+            _clicked = false;
 
-            StartCoroutine(WaitAndTurnOffInfo());
-            
-            IEnumerator WaitAndTurnOffInfo()
-            {
-                yield return _waitTime;
-                _clicked = false;
-                OnBlockExited?.Invoke();
-            }
         }
 
         private void OnMouseDown()
@@ -68,10 +60,6 @@ namespace Jenga
             OnBlockClicked?.Invoke(_studentsGradesData);
             _clicked = true;
         }
-
-        #endregion
-
-        #region PRIVATE_METHODS
 
         #endregion
 

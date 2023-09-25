@@ -6,27 +6,16 @@ namespace Jenga
 {
     public class GlassTowerBreaker : MonoBehaviour
     {
-        #region EXPOSED_VARIABLES
-        
-        private JengaPoolBuilder poolBuilder;
-
-        #endregion
-
         #region PRIVATE_VARIABLES
         
         private List<BlockInfo> _allBlocks = new List<BlockInfo>();
 
         #endregion
 
-        #region PUBLIC_VARIABLES
-
-        #endregion
-
         #region UNITY_CALLS
         
-        public void InitStart(JengaPoolBuilder poolBuilder, List<BlockInfo> allBlocks)
+        public void InitStart(List<BlockInfo> allBlocks)
         {
-            this.poolBuilder = poolBuilder;
             _allBlocks = allBlocks;
         }
 
@@ -37,10 +26,6 @@ namespace Jenga
                 BreakGlassTower();
             }
         }
-
-        #endregion
-
-        #region PRIVATE_METHODS
 
         #endregion
 
