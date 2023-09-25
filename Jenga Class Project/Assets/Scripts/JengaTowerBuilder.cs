@@ -9,9 +9,9 @@ namespace Jenga
     {
         #region EXPOSED_VARIABLES
 
-        [SerializeField] private Transform leftTower;
-        [SerializeField] private Transform centerTower;
-        [SerializeField] private Transform rightTower;
+        [SerializeField] private JengaTower leftTower;
+        [SerializeField] private JengaTower centerTower;
+        [SerializeField] private JengaTower rightTower;
         [SerializeField] private float blockSpacing = 0.25f;
         [SerializeField] private bool gradualInstantiation = false;
         [SerializeField] private int rotationInterval = 3;
@@ -47,8 +47,9 @@ namespace Jenga
 
         #region PRIVATE_METHODS
 
-        private void CreateJengaTowerInstantly(Transform tower, List<StudentsGradesData> grades)
+        private void CreateJengaTowerInstantly(JengaTower tower, List<StudentsGradesData> grades)
         {
+            tower.SetTowerName(grades[0].grade);
             var spawnPosition = Vector3.zero;
             var rotation = Quaternion.identity;
             var staggerX = false;
@@ -58,7 +59,7 @@ namespace Jenga
                 var block = GetBlock(grades[i].mastery);
                 
                 block.SetData(grades[i]);
-                block.transform.SetParent(tower);
+                block.transform.SetParent(tower.transform);
                 if (startRotationIndex == 0)
                 {
                     rotation = Quaternion.Euler(0f, staggerX ? 90f : 0f, 0f);
