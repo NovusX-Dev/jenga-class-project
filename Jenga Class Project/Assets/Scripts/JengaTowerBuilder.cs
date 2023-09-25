@@ -61,9 +61,17 @@ namespace Jenga
                 block.transform.SetParent(tower);
                 if (startRotationIndex == 0)
                 {
-                    spawnPosition.x = 0f;
-                    spawnPosition.z = 0f;
                     rotation = Quaternion.Euler(0f, staggerX ? 90f : 0f, 0f);
+                    if (staggerX)
+                    {
+                        spawnPosition.z = 0f;
+                        spawnPosition.x = (block.transform.localScale.z + blockSpacing) * -1f;
+                    }
+                    else
+                    {
+                        spawnPosition.x = 0f;
+                        spawnPosition.z = (block.transform.localScale.z + blockSpacing) * -1f;
+                    }
                 }
                 block.transform.localPosition = spawnPosition;
                 block.transform.rotation = rotation;
@@ -77,7 +85,7 @@ namespace Jenga
 
                     if(startRotationIndex == 1)
                     {
-                        spawnPosition.x = (block.transform.localScale.z + blockSpacing) * -1f;
+                        spawnPosition.x = 0f;
                     }
                     if(startRotationIndex == 2)
                     {
@@ -89,7 +97,7 @@ namespace Jenga
                     rotation = Quaternion.Euler(0f, 0f, 0f);
                     if(startRotationIndex == 1)
                     {
-                        spawnPosition.z = (block.transform.localScale.z + blockSpacing) * -1f;
+                        spawnPosition.z = 0f;
                     }
                     if(startRotationIndex == 2)
                     {
